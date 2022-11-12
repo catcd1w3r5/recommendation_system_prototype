@@ -1,3 +1,5 @@
+import FakeDatabase from "./fakeDatabase.js";
+
 /**
  *
  * @param stringData {StringData}
@@ -76,18 +78,32 @@ const KeywordCoefficient = (stringData, tags) => {
  */
 const Coefficient = (stringData, tags) => {
     let confidence = 0;
-    const finalResults = new Set();
+    const keywordData = new Set();
     const possibleNewTags = new Set();
     stringData.forEach(data => {
         const {results, createNewTag} = KeywordCoefficient(data, tags);
         results.forEach(match => {
             confidence += match.percentage;
-            finalResults.add(match.id);
+            keywordData.add(match.id);
         });
         if (createNewTag) possibleNewTags.add(data);
     });
-    confidence /= finalResults.size;
-    return {confidence, results: finalResults, possibleNewTags};
+    //clone keywordData
+    const searchData = Array.from(keywordData);
+
+    possibleNewTags.forEach(item => {
+        const id = FakeDatabase.addKeyword(item)
+        // keywordData.add(id);
+    });
+    confidence = (confidence + possibleNewTags.size) / (searchData.size + possibleNewTags.size);
+
+    // const keywords = Array.from(keywordData);
+
+    return {
+        confidence,
+        // keywords,
+        searchData
+    };
 }
 
 

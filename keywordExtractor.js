@@ -7,12 +7,15 @@ import {parseSubstring} from "./stringParsing.js";
 const extract = str => {
     const subStrings = str.toLowerCase().split(" ");
     const dataSet = new Set();
-    for (let i = 0; i < subStrings.length; i++) {
-        dataSet.add(parseSubstring(subStrings[i]));
-    }
+    subStrings.filter((item) => {
+        //check against blacklist
+        return true;
+    }).forEach((item) => {
+        //remove duplicates
+        dataSet.add(parseSubstring(item));
+    });
     return dataSet;
 }
-
 
 
 export default extract;
