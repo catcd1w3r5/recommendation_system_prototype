@@ -1,4 +1,5 @@
 import {parseSubstring} from "./stringParsing.js";
+import {getBlacklist} from "./Model/index.js";
 
 /**
  * @param str {string}
@@ -9,7 +10,7 @@ const extract = str => {
     const dataSet = new Set();
     subStrings.filter((item) => {
         //check against blacklist
-        return true;
+        return !getBlacklist().includes(item);
     }).forEach((item) => {
         //remove duplicates
         dataSet.add(parseSubstring(item));
