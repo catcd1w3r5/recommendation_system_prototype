@@ -1,4 +1,4 @@
-import FakeDatabase from "./fakeDatabase.js";
+import {addKeyword} from "./Model/index.js";
 
 /**
  *
@@ -92,16 +92,16 @@ const Coefficient = (stringData, tags) => {
     const searchData = Array.from(keywordData);
 
     possibleNewTags.forEach(item => {
-        const id = FakeDatabase.addKeyword(item)
-        // keywordData.add(id);
+        const id = addKeyword(item);
+        keywordData.add(id);
     });
     confidence = (confidence + possibleNewTags.size) / (searchData.size + possibleNewTags.size);
 
-    // const keywords = Array.from(keywordData);
+    const keywords = Array.from(keywordData);
 
     return {
         confidence,
-        // keywords,
+        keywords,
         searchData
     };
 }
