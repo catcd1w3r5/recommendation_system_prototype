@@ -1,12 +1,8 @@
 import {addBuyOrder, addSellOrder,getRelatedBuyOrders,getRelatedSellOrders} from "./Model/index.js";
 
-const newBuyOrder = (order) => {
-    return addBuyOrder(order);
-}
+const newBuyOrder = addBuyOrder;
 
-const newSellOrder = (order) => {
-    return addSellOrder(order);
-}
+const newSellOrder =addSellOrder;
 
 // const getRecommendedBuyOrders = (sellOrderID) => {
 //     return getRelatedBuyOrders(sellOrderID);

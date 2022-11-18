@@ -3,7 +3,7 @@ import {getBlacklist} from "./Model/index.js";
 
 /**
  * @param str {string}
- * @returns {Set<string>}
+ * @returns {Set<StringData>}
  */
 const extract = str => {
     const subStrings = str.toLowerCase().split(" ");

@@ -6,16 +6,13 @@ import StringData from "./stringData.js";
  */
 const parseSubstring = str => {
     if (str.length === 1) return parseChar(str);
-    const dict = new Map();
+    const dict = {};
     for (let i = 0; i < str.length - 1; i++) {
         const subStr = str.substring(i, i + 2);
-        const count = dict.has(subStr)
-            ? dict.get(subStr) + 1 : 1;
-
-        dict.set(subStr, count);
+        dict[subStr] = dict[subStr] === undefined ? 1 : dict[subStr] + 1;
     }
     const data = new StringData();
-    data.map = dict;
+    data.dictionary = dict;
 
     return data;
     // returns a dictionary of all the substrings and their counts
@@ -24,7 +21,7 @@ const parseSubstring = str => {
 const parseChar = str => {
     const char = str.charAt(0);
     const data = new StringData();
-    data.map = char;
+    data.character = char;
     return data;
 }
 

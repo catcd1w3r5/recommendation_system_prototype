@@ -5,21 +5,17 @@ import {MatchThreshold} from "../config.js";
 import findPercentMatch from "../findPercentMatch.js";
 import extract from "../keywordExtractor.js";
 
-const getSellOrders = (id) => {
-    return sellOrders[id];
-}
+const getSellOrders = (id) => sellOrders[id]
 
-const getRelatedSellOrders = (buyOrderID) => {
-    return keywordBuyOrderLink[buyOrderID];
-}
+const getRelatedSellOrders = (buyOrderID) => keywordBuyOrderLink[buyOrderID]
 
 const addSellOrder = (order) => {
-    const keywords = extract(order)
+    const keywords = extract(order);
     const id = sellOrders.length;
 
     const coefficient = Coefficient(keywords, getKeywords());
-    const mainTags = coefficient.searchData
-    sellOrders.push({id, keywords: coefficient.keywords});
+    const mainTags = coefficient.keywords
+    sellOrders.push({id, keywords: mainTags});
 
     keywordSellOrderLink[id] = {id: id, keywords: []};
 
@@ -39,5 +35,4 @@ const addSellOrder = (order) => {
 
     return id;
 }
-
 export {getSellOrders, addSellOrder, getRelatedSellOrders};

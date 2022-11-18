@@ -1,4 +1,5 @@
 import {addKeyword} from "./Model/index.js";
+import {KeywordThreshold, NewKeywordThreshold} from "./config.js";
 
 /**
  *
@@ -10,22 +11,24 @@ const CoefficientPercentage = (stringData, otherStringData) => {
     // console.log(otherStringData.id);
     //test for characters
 
-    const isStringDataString = typeof stringData.map === "string";
-    const isOtherStringDataString = typeof otherStringData.map === "string";
+    const isStringDataString = typeof stringData.character === "string";
+    const isOtherStringDataString = typeof otherStringData.character === "string";
     // console.log(isStringDataString);
     // console.log(isOtherStringDataString);
     if (isStringDataString || isOtherStringDataString) {
         // console.log("string");
-        if (isStringDataString && isOtherStringDataString && stringData.map === otherStringData.map) return 1;
+        if (isStringDataString && isOtherStringDataString && stringData.character === otherStringData.character) return 1;
         return 0;
     }
 
 
     // console.log("main" + otherStringData.id);
     //find smaller string (optimization)
+    const stringDataLength = Object.keys(stringData.dictionary).length;
+    const otherStringDataLength = Object.keys(otherStringData.dictionary).length;
     let smaller = stringData;
     let larger = otherStringData;
-    if (otherStringData.map.size < stringData.map.size) {
+    if (otherStringDataLength < stringDataLength) {
         smaller = otherStringData;
         larger = stringData;
     }
@@ -33,21 +36,18 @@ const CoefficientPercentage = (stringData, otherStringData) => {
 
     //find the total number of matches
     let matches = 0;
-    for (let [key, value] of smaller.map) {
-        if (larger.map.has(key)) {
-            const count = larger.map.get(key);
+    Object.keys(smaller.dictionary).forEach(key => {
+        const value = smaller.dictionary[key];
+        if (larger.dictionary[key]) {
+            const count = larger.dictionary[key];
             matches += Math.min(count, value);
         }
-    }
+    });
 
     //calculate the percentage match
-    const avgStringSize = (stringData.map.size + otherStringData.map.size) / 2;
+    const avgStringSize = (otherStringDataLength + stringDataLength) / 2;
     return matches / avgStringSize;
 }
-
-
-const AcceptedThreshold = 0.5;
-const NewTagThreshold = 0.5;
 
 // 1 keyword might be a match for multiple tags
 /**
@@ -62,12 +62,12 @@ const KeywordCoefficient = (stringData, tags) => {
     let highestPercentage = 0;
     tags.forEach(item => {
         const percentage = CoefficientPercentage(stringData, item);
-        if (percentage >= AcceptedThreshold) {
+        if (percentage >= KeywordThreshold) {
             results.push({id: item.id, percentage})
             if (percentage > highestPercentage) highestPercentage = percentage;
         }
     });
-    const createNewTag = highestPercentage <= NewTagThreshold;
+    const createNewTag = highestPercentage <= NewKeywordThreshold;
     return {results, createNewTag};
 }
 /**
@@ -89,20 +89,18 @@ const Coefficient = (stringData, tags) => {
         if (createNewTag) possibleNewTags.add(data);
     });
     //clone keywordData
-    const searchData = Array.from(keywordData);
+    // const searchData = Array.from(keywordData);
 
     possibleNewTags.forEach(item => {
         const id = addKeyword(item);
         keywordData.add(id);
     });
-    confidence = (confidence + possibleNewTags.size) / (searchData.size + possibleNewTags.size);
+    // confidence = (confidence + possibleNewTags.size) / (searchData.size + possibleNewTags.size);
 
     const keywords = Array.from(keywordData);
 
     return {
-        confidence,
-        keywords,
-        searchData
+        keywords
     };
 }
 

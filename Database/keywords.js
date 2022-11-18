@@ -7,7 +7,7 @@ const keywords = [];
     {
         id: 0,
         //todo find a way to store maps in sql (worse case use json/string)
-        map: {
+        dictionary: {
             'ca': 1,
             'ar': 1,
         }

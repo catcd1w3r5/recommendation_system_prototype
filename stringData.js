@@ -5,9 +5,14 @@ class StringData {
     id;
 
     /**
-     * @type {Map<string, number> | string}
+     * @type {Object.<string, number> | undefined}
      */
-    map;
+    dictionary;
+
+    /**
+     * @type {string  | undefined}
+     */
+    character
 }
 
 export default StringData;
