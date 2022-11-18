@@ -2,20 +2,20 @@ import {getRelatedBuyOrders, getRelatedSellOrders, newBuyOrder, newSellOrder} fr
 
 
 
-// newBuyOrder("I want to buy a car");
-// newBuyOrder("Planning to buy a car for 1 thousand $");
-// newBuyOrder("Looking for someone to do my homework");
-// newBuyOrder("Buying 1000000 dollar note for $1000001")
-// newBuyOrder("I want to buy a car");
-// newBuyOrder("6.5 mm copper wire");
-//
-//
-// newSellOrder("I want to sell a car");
-// newSellOrder("I want sell my kidneys");
-// newSellOrder("I want to sell a used car");
-// newSellOrder("Selling used toilet paper");
-// newSellOrder("Selling used toilet paper");
-// newSellOrder("looking for wire");
+newBuyOrder("I want to buy a car");
+newBuyOrder("Planning to buy a car for 1 thousand $");
+newBuyOrder("Looking for someone to do my homework");
+newBuyOrder("Buying 1000000 dollar note for $1000001")
+newBuyOrder("I want to buy a car");
+newBuyOrder("6.5 mm copper wire");
+
+
+newSellOrder("I want to sell a car");
+newSellOrder("I want sell my kidneys");
+newSellOrder("I want to sell a used car");
+newSellOrder("Selling used toilet paper");
+newSellOrder("Selling used toilet paper");
+newSellOrder("looking for wire");
 newSellOrder("32 mm diameter circular hollow section");
 newBuyOrder("15 cm diameter circular something section")
 //expected confidence: 3/6 = 0.5
