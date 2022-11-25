@@ -1,7 +1,7 @@
 import blacklist from "./blacklist.js";
 import keywords from "./keywords.js";
-import sellOrders from "./sellOrders.js";
-import buyOrders from "./buyOrders.js";
+import sellOrders from "./SellOrders.js";
+import buyOrders from "./BuyOrders.js";
 import keywordSellOrderLink from "./keyword-SellOrderLink.js";
 import keywordBuyOrderLink from "./keyword-BuyOrderLink.js";
 
